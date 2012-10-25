@@ -180,10 +180,10 @@ describe("Backbone.FixedLengthCollection", function() {
 
     it("adding 2 items when there are already 14 should fail", function() {
 
-        var FOURTEEN = PHILOSOPHERS.splice(0, 14);
-        expect(FOURTEEN.length).toBe(14);
+        fixed.add(PHILOSOPHERS);
+        fixed.pop();
 
-        fixed.add(FOURTEEN);
+        expect(fixed.dummies()).toBe(1);
         expect(fixed.length).toBe(15);
 
         var NEWCOMMIES = [new TestModel({'id': 16, 'name': 'Che Guevara'}),
@@ -194,6 +194,21 @@ describe("Backbone.FixedLengthCollection", function() {
         }).toThrow(
             new RangeError('FixedLengthCollection too small')
         );
+    });
+
+    it("popping has no effect when we're full of dummies", function() {
+        fixed.pop();
+        expect(fixed.length).toBe(15);
+        expect(fixed.dummies()).toBe(15);
+    });
+
+    it("popping removes one element when we're full of items", function() {
+        fixed.add(PHILOSOPHERS);
+        expect(fixed.dummies()).toBe(0);
+        expect(fixed.length).toBe(15);
+        fixed.pop();
+        expect(fixed.length).toBe(15);
+        expect(fixed.dummies()).toBe(1);
     });
 
 });
