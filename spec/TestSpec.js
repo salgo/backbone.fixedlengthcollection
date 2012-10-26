@@ -187,7 +187,7 @@ describe("Backbone.FixedLengthCollection", function() {
         expect(fixed.length).toBe(15);
 
         var NEWCOMMIES = [new TestModel({'id': 16, 'name': 'Che Guevara'}),
-                    new TestModel({'id': 17, 'name': 'Ho Chi Minh'})];
+                          new TestModel({'id': 17, 'name': 'Ho Chi Minh'})];
 
         expect(function() {
             fixed.add(NEWCOMMIES);
@@ -211,4 +211,30 @@ describe("Backbone.FixedLengthCollection", function() {
         expect(fixed.dummies()).toBe(1);
     });
 
+    it("pushing adds element onto end of collection", function() {
+        var che = new TestModel({'id': 16, 'name': 'Che Guevara'});
+
+        fixed.push(che);
+        expect(fixed.length).toBe(15);
+        expect(fixed.dummies()).toBe(14);
+        expect(fixed.at(0)).toBe(che);
+    });
+
+    it("shifting removes first item", function() {
+        var item = null;
+
+        fixed.add(PHILOSOPHERS);
+        item = fixed.shift();
+        expect(item.get('name')).toBe('David Hume');
+    });
+
+    it("unshift adds item", function() {
+        var che = new TestModel({'id': 16, 'name': 'Che Guevara'});
+
+        fixed.unshift(che);
+        expect(fixed.at(0)).toBe(che);
+        expect(fixed.dummies()).toBe(14);
+        expect(fixed.length).toBe(15);
+        expect(fixed.at(0)).toBe(che);
+    });
 });
