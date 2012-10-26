@@ -196,6 +196,11 @@ describe("Backbone.FixedLengthCollection", function() {
         );
     });
 
+    it("adding 1 items at the final position should work", function() {
+        var che = new TestModel({'id': 16, 'name': 'Che Guevara'});
+        fixed.add(che, {'at': 14});
+    });
+
     it("popping has no effect when we're full of dummies", function() {
         fixed.pop();
         expect(fixed.length).toBe(15);

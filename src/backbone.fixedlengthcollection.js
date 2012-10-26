@@ -78,7 +78,7 @@ Backbone.FixedLengthCollection = (function(Backbone, _, $){
             }
 
             if (options.at) {
-                if (options.at + models.length >= this.fixedLength) {
+                if (options.at + models.length > this.fixedLength) {
                     throw new Error("Can't add " + models.length + " items " +
                                     "at position " + options.at + " " +
                                     "collection is too small");
