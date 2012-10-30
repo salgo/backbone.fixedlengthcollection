@@ -176,6 +176,7 @@ Backbone.FixedLengthCollection = (function(Backbone, _, $){
 
                 if (this.dummyModels.indexOf(index) === -1) {
                     this.dummyModels.push(index);
+                    this.dummyModels.sort();
                 }
             }
 

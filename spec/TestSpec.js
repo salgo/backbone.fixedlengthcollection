@@ -242,4 +242,49 @@ describe("Backbone.FixedLengthCollection", function() {
         expect(fixed.length).toBe(15);
         expect(fixed.at(0)).toBe(che);
     });
+
+    it("add, remove some items and then readd them", function() {
+
+        fixed.add(PHILOSOPHERS[0]);
+        fixed.add(PHILOSOPHERS[1]);
+        fixed.add(PHILOSOPHERS[14]);
+        fixed.add(PHILOSOPHERS[8]);
+        fixed.add(PHILOSOPHERS[10]);
+        fixed.add(PHILOSOPHERS[12]);
+        fixed.add(PHILOSOPHERS[2]);
+        fixed.add(PHILOSOPHERS[5]);
+        fixed.add(PHILOSOPHERS[6]);
+        fixed.add(PHILOSOPHERS[4]);
+        fixed.add(PHILOSOPHERS[3]);
+        fixed.add(PHILOSOPHERS[13]);
+        fixed.add(PHILOSOPHERS[7]);
+        fixed.add(PHILOSOPHERS[9]);
+        fixed.add(PHILOSOPHERS[11]);
+
+        expect(fixed.dummies()).toBe(0);
+
+        fixed.remove(PHILOSOPHERS[11]);
+        fixed.remove(PHILOSOPHERS[9]);
+        fixed.remove(PHILOSOPHERS[7]);
+        fixed.remove(PHILOSOPHERS[13]);
+        fixed.remove(PHILOSOPHERS[3]);
+        fixed.remove(PHILOSOPHERS[4]);
+        fixed.remove(PHILOSOPHERS[6]);
+        fixed.remove(PHILOSOPHERS[5]);
+        fixed.remove(PHILOSOPHERS[2]);
+        fixed.remove(PHILOSOPHERS[12]);
+        fixed.remove(PHILOSOPHERS[10]);
+        fixed.remove(PHILOSOPHERS[8]);
+        fixed.remove(PHILOSOPHERS[14]);
+        fixed.remove(PHILOSOPHERS[1]);
+        fixed.remove(PHILOSOPHERS[0]);
+
+        expect(fixed.dummies()).toBe(15);
+
+        fixed.add(PHILOSOPHERS[3]);
+
+        var item = fixed.at(0);
+
+        expect(item.get('name')).toBe('James Mill');
+    });
 });
