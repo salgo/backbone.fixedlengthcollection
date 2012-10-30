@@ -280,6 +280,7 @@ describe("Backbone.FixedLengthCollection", function() {
         fixed.remove(PHILOSOPHERS[0]);
 
         expect(fixed.dummies()).toBe(15);
+        expect(fixed.dummyModels).toEqual(_.range(15));
 
         fixed.add(PHILOSOPHERS[3]);
 
@@ -287,4 +288,41 @@ describe("Backbone.FixedLengthCollection", function() {
 
         expect(item.get('name')).toBe('James Mill');
     });
+
+    it("removing items does not reposition other items", function() {
+
+        var item = null, i = 0;
+
+        fixed.add(PHILOSOPHERS);
+
+        item = fixed.at(10);
+        fixed.remove(item);
+        expect(fixed.length).toBe(15);
+
+        item = fixed.at(10);
+        expect(item.get('name')).toBe(undefined);
+        expect(fixed.dummyModels).toEqual([10]);
+
+        item = fixed.at(0);
+        fixed.remove(item);
+        item = fixed.at(0);
+        expect(item.get('name')).toBe(undefined);
+        expect(fixed.dummyModels).toEqual([0, 10]);
+
+        item = fixed.at(14);
+        fixed.remove(item);
+        item = fixed.at(14);
+        expect(item.get('name')).toBe(undefined);
+        expect(fixed.dummyModels).toEqual([0, 10, 14]);
+
+        for (i = 0; i < fixed.length; i++) {
+            if (_.indexOf(fixed.dummyModels, i) != -1) {
+                continue;
+            }
+            expect(fixed.at(i).get('name')).toEqual(PHILOSOPHERS[i].name);
+        }
+    });
 });
+
+
+

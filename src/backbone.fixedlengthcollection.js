@@ -176,9 +176,11 @@ Backbone.FixedLengthCollection = (function(Backbone, _, $){
 
                 if (this.dummyModels.indexOf(index) === -1) {
                     this.dummyModels.push(index);
-                    this.dummyModels.sort();
                 }
             }
+
+            // Perform numeric sort
+            this.dummyModels.sort(function(a,b){return a-b;});
 
             return this;
         },
