@@ -3,7 +3,7 @@
 
 Backbone.FixedLengthDummyModel = Backbone.Model.extend({});
 
-Backbone.FixedLengthCollection = (function(Backbone, _, $){
+Backbone.FixedLengthCollection = (function(Backbone, _) {
 
     var FixedLengthCollection = function(models, options) {
         options || (options = {});
@@ -196,4 +196,4 @@ Backbone.FixedLengthCollection = (function(Backbone, _, $){
 
     return FixedLengthCollection;
 
-})(Backbone, _, jQuery);
+})(Backbone, _);
