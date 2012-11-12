@@ -26,6 +26,18 @@ var PHILOSOPHERS = [
     {'id': 15, 'name': 'Antonio Gramsci'}
 ];
 
+describe('Backbone.FixedLengthDummyModel', function() {
+    var dummy;
+
+    beforeEach(function() {
+        dummy = new Backbone.FixedLengthDummyModel();
+    });
+
+    it("identifies itself as a dummy model", function() {
+        expect(dummy.isDummyModel).toEqual(true);
+    });
+});
+
 describe("Backbone.FixedLengthCollection", function() {
 
     beforeEach(function() {
@@ -322,6 +334,7 @@ describe("Backbone.FixedLengthCollection", function() {
             expect(fixed.at(i).get('name')).toEqual(PHILOSOPHERS[i].name);
         }
     });
+
 });
 
 

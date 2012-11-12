@@ -1,7 +1,9 @@
 
 
 
-Backbone.FixedLengthDummyModel = Backbone.Model.extend({});
+Backbone.FixedLengthDummyModel = Backbone.Model.extend({
+    isDummyModel: true
+});
 
 Backbone.FixedLengthCollection = (function(Backbone, _) {
 
