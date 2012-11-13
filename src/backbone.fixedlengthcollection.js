@@ -171,9 +171,10 @@ Backbone.FixedLengthCollection = (function(Backbone, _) {
                     this, model, opts
                 );
 
+                opts.at = index;
+
                 Backbone.Collection.prototype.add.call(
-                    this, new Backbone.FixedLengthDummyModel(),
-                    {'at': index, 'silent': false}
+                    this, new Backbone.FixedLengthDummyModel(), opts
                 );
 
                 if (this.dummyModels.indexOf(index) === -1) {
