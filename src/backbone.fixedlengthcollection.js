@@ -22,13 +22,22 @@ Backbone.FixedLengthCollection = (function(Backbone, _) {
     _.extend(FixedLengthCollection.prototype, Backbone.Collection.prototype, {
         reset: function(models, options) {
             options || (options = {});
-            options.silent = true;
+
+            var do_trigger = true;
+
+            if (options.silent) {
+                do_trigger = false;
+            } else {
+                options.silent = true;
+            }
             /* Do the reset */
             Backbone.Collection.prototype.reset.call(this, models, options);
             /* Reset our array of dummy models */
             this.dummyModels = [];
             this.pad();
-            this.trigger('reset');
+            if (do_trigger) {
+                this.trigger('reset');
+            }
             return this;
         },
 
